@@ -3,9 +3,10 @@ package com.jialin.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.jialin.basedao.BaseDaoImp;
 import com.jialin.entity.User;
 
-public class UserDaoImp implements IUserDao {
+public class UserDaoImp extends BaseDaoImp<User> implements IUserDao {
 
 	private SessionFactory sessionFactory;
 
@@ -17,27 +18,6 @@ public class UserDaoImp implements IUserDao {
 		return sessionFactory.getCurrentSession();
 	}
 
-	@Override
-	public void AddUser(User user) {
-		System.out.println("-------UserDaoImp.AddUser-----------"
-				+ user.getName());
-		getSession().save(user);
-		
-		//getSession().getTransaction().commit();
-	}
-
-	@Override
-	public void modifyUser(User user) {
-		System.out.println("-------UserDaoImp.modifyUser-----------"
-				+ user.getName());
-		getSession().update(user);
-	}
-
-	@Override
-	public void deleteUser(User user) {
-		System.out.println("-------UserDaoImp.deleteUser-----------"
-				+ user.getName());
-		getSession().delete(user);
-	}
+	
 
 }

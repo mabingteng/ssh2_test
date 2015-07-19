@@ -6,57 +6,21 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.jialin.basedao.BaseDaoImp;
 import com.jialin.entity.Population;
+@SuppressWarnings("unchecked")
+public class PopulationDaoImp extends BaseDaoImp<Population> implements IPopulationDao {
 
-public class PopulationDaoImp implements IPopulationDao {
+    
+    @Override
+    public List<Population> findByIds(int[] s) {
+	// TODO 自动生成的方法存根
+	
+	return  (List<Population>)getSession().createQuery("from Population Where id in (:ids)").list();
+    }
 
 	
-	private SessionFactory sessionfactory;
 	
-
-	public void setSessionfactory(SessionFactory sessionfactory) {
-		this.sessionfactory = sessionfactory;
-	}
-	
-	public Session getSession(){
-		return sessionfactory.getCurrentSession();
-	}
-
-	@Override
-	public void addPersion(Population p) {
-		// TODO Auto-generated method stub
-		getSession().save(p);
-
-	}
-
-	@Override
-	public void deletePersion(Population p) {
-		// TODO Auto-generated method stub
-		getSession().delete(p);
-	}
-
-	@Override
-	public void modifyPersion(Population p) {
-		// TODO Auto-generated method stub
-		getSession().update(p);
-
-	}
-
-	@Override
-	public Population findPersionById(int id) {
-		// TODO Auto-generated method stub
-		
-		return (Population) getSession().get(Population.class, id);
-	}
-
-	@Override
-	public List<Population> getPersionList() {
-		// TODO Auto-generated method stub
-		String sql = "from Population";
-		Query que = getSession().createQuery(sql);
-		List<Population> list = que.list();
-		return list;
-	}
 
 
 }

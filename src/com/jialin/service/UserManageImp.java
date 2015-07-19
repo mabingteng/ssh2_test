@@ -21,20 +21,20 @@ public class UserManageImp implements IUserManage {
 	@Override
 	public void addUser(User user) {
 		System.out.println("------UserManageImp.adddUser--------"+user.getName());
-		userDao.AddUser(user);
+		userDao.add(user);
 		
 	}
 
 	@Override
 	public void modifyUser(User user) {
 		System.out.println("------UserManageImp.modifyUser--------"+user.getName());
-		userDao.modifyUser(user);
+		userDao.update(user);
 
 	}
 
 	@Override
 	public void deleteUser(User user) {
 		System.out.println("------UserManageImp.deleteUser--------"+user.getName());
-		userDao.deleteUser(user);
+		userDao.delete(user);
 	}
 }

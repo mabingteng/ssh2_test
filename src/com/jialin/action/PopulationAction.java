@@ -62,6 +62,7 @@ public class PopulationAction extends ActionSupport {
 	    return "success";
 	}
 	public String pList(){
+	    	System.out.println("Population.pList()");
 		HttpServletRequest requset =  ServletActionContext.getRequest();
 		List<Population> perlist = pManager.getPersionList();
 		requset.setAttribute("perlist", perlist);
