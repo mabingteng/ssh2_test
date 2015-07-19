@@ -60,7 +60,47 @@
 
     <!-- The fav icon -->
     <link rel="shortcut icon" href="img/favicon.ico">
-
+	<script type="text/javascript">
+		$(document).ready(function() {
+						
+			$('#example').dataTable(
+					{
+						 "bDestroy":true,
+				         "bRetrieve": true
+					}
+			).fnDestroy(); 
+		    
+			$('#example').dataTable( {
+		    	 
+		        
+		          "oLanguage": {
+		               "sLengthMenu": "每页 _MENU_ 条记录",
+		               "sZeroRecords": "信息未找到",
+		               "sInfo":"共 _TOTAL_ 条记录",
+		               "sInfoEmpty": "未找到符合条件数据",
+		               "sInfoFiltered": "(共 _MAX_ 条数据)",
+		               "sSearch":"关键字查询:",
+		               
+		           }, 
+		           "bPaginate": true,
+		           "bLengthChange": true,
+		           "bFilter": true,
+		           "bSort": true,
+		           "bInfo": true,
+		           "bAutoWidth": true, 
+		           
+		            "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-12'i><'col-md-12 center-block'p>>",
+		            "sPaginationType": "bootstrap",
+		           
+		             "bProcessing": true,
+		             "bRetrieve": true ,
+			         "bDestroy":true
+		       } );
+		     
+		     
+		} );
+		
+	</script>
 </head>
 
 <body>
@@ -180,10 +220,10 @@
 		                        </li>
                             </ul>
                         </li>
-                       <!--  <li><a class="ajax-link" href="ui.html"><i class="glyphicon glyphicon-eye-open"></i><span> UI Features</span></a>
+                       <li><a class="ajax-link" href="ui.html"><i class="glyphicon glyphicon-eye-open"></i><span> UI Features</span></a>
                         </li>
                         <li><a class="ajax-link" href="form.html"><i
-                                    class="glyphicon glyphicon-edit"></i><span> Forms</span></a></li> -->
+                                    class="glyphicon glyphicon-edit"></i><span> Forms</span></a></li> 
                         <li><a class="ajax-link" href="chart.html"><i class="glyphicon glyphicon-list-alt"></i><span> 社区信息门户</span></a>
                         </li>
                       
@@ -196,14 +236,14 @@
                         <li><a class="ajax-link" href="grid.html"><i
                                     class="glyphicon glyphicon-th"></i><span> Grid</span></a></li>
                         <li><a href="tour.html"><i class="glyphicon glyphicon-globe"></i><span> 相关链接</span></a></li>
-                        <!-- <li><a class="ajax-link" href="icon.html"><i
+                         <li><a class="ajax-link" href="icon.html"><i
                                     class="glyphicon glyphicon-star"></i><span> Icons</span></a></li>
                         <li><a href="error.html"><i class="glyphicon glyphicon-ban-circle"></i><span> Error Page</span></a>
                         </li>
                         <li><a href="login.html"><i class="glyphicon glyphicon-lock"></i><span> Login Page</span></a>
                         </li>
                     </ul>
-                    <label id="for-is-ajax" for="is-ajax"><input id="is-ajax" type="checkbox"> Ajax on menu</label> -->
+                    <label id="for-is-ajax" for="is-ajax"><input id="is-ajax" type="checkbox"> Ajax on menu</label> 
                 </div>
             </div>
         </div>
@@ -243,20 +283,34 @@
 									For help with such table please check <a
 										href="http://datatables.net/" target="_blank">http://datatables.net/</a>
 								</div> -->
-								<table
-									class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+								<table id="example" class="table table-striped table-bordered bootstrap-datatable  responsive">
 									<thead>
 										<tr>
-											<th style="width: 5%">姓名</th>
+											<th style="width: 10%">姓名</th>
 											<th style="width: 10%">房间号</th>
 											<th style="width: 10%">性别</th>
 											<th style="width: 20%">身份证号</th>
 											<th style="width: 25%">地址</th>
-											<th style="width: 35%">编辑</th>
+											<th style="width: 30%">编辑</th>
 										</tr>
 									</thead>
 									<tbody>
-										<%
+											<!-- <tr>
+												<td> name</td>
+												<td class="center">room_num</td>
+												<td class="center">sex</td>
+												<td class="center">id</td>
+												<td class="center">address()</td>
+												<td class="center"><a class="btn btn-success" href="#">
+														<i class="glyphicon glyphicon-zoom-in icon-white"></i>
+														View
+												</a> <a class="btn btn-info" href="#"> <i
+														class="glyphicon glyphicon-edit icon-white"></i> Edit
+												</a> <a class="btn btn-danger" href=""> <i
+														class="glyphicon glyphicon-trash icon-white"></i> Delete
+												</a></td>
+												</tr> -->
+										 <%
 											List<Population> list1 = (List<Population>)request.getAttribute("perlist"); 
 											 if(list1!=null)
 											 for(Population p : list1)
@@ -280,7 +334,7 @@
 										<%	
 											 	}   
 											 
-										%>
+										%> 
 										<%-- <s:iterator value="list" var="c">
 											<tr>
 												<td><s:property value="#c.getName()" /></td>
