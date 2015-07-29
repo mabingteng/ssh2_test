@@ -29,14 +29,23 @@ public class LoginAction extends ActionSupport {
 		
 		System.out.println(request.getCharacterEncoding());
 		
-		if("root".equals(user.getName()) && "root123".equals(user.getPassword()))
+		if("root".equals(user.getAccountName()) && "root".equals(user.getPassword()))
 		{
 			//HttpSession se = ServletActionContext.getRequest().getSession();
 			Map session=ActionContext.getContext().getSession();
-			session.put("user.name", user.getName());
+			session.put("user.accountName", user.getAccountName());
 			
 			System.out.println("成功登陆用户="+user.getName());
 			return "success";
+		}
+		if("admin".equals(user.getAccountName()) && "admin".equals(user.getPassword()))
+		{
+			//HttpSession se = ServletActionContext.getRequest().getSession();
+			Map session=ActionContext.getContext().getSession();
+			session.put("user.accountName", user.getAccountName());
+			
+			System.out.println("成功登陆用户="+user.getName());
+			return "admin";
 		}
 		
 		System.out.println("失败登陆用户="+user.getName());
