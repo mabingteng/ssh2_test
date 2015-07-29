@@ -42,21 +42,21 @@
 		    <result name=""></result>
 			<result name="success">/page/{2}.jsp</result>
 			<result name="fail">/fail.jsp</result>
-			<!-- <interceptor-ref name = "myInterceptor"/> -->
+			<interceptor-ref name = "myInterceptor"/>
 		</action>
 	</package>
 	<package name="AdminAction" namespace="/A" extends="abstract_struts" >
 		<action name="*_*" class="logincheckAction" method="{1}">
 			<result name="success">/page/{2}.jsp</result>
 			<result name="fail">/fail.jsp</result>
-			<!-- <interceptor-ref name = "myInterceptor"/> -->
+		    <interceptor-ref name = "myInterceptor"/>
 		</action>	
 	</package>	
 	<package name="pAction" namespace="/p" extends="abstract_struts" >
 		<action name="*_*" class="com.jialin.action.PopulationAction" method="{1}">
 			<result name="success">/page/{2}.jsp</result>
 			<result name="fail">/fail.jsp</result>
-			<!-- <interceptor-ref name = "myInterceptor"/> -->
+		    <interceptor-ref name = "myInterceptor"/> 
 		</action>	
 	</package>
 
