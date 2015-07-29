@@ -37,9 +37,10 @@
 		<property name="show_sql">true</property>
 	
 	
-	
+	    <mapping class ="com.jialin.entity.Category"/>
 		<mapping class="com.jialin.entity.User"/>
 		<mapping class="com.jialin.entity.Population"/>
+		<mapping class="com.jialin.entity.Admin" />
 	</session-factory>
 	
 	

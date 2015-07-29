@@ -10,19 +10,18 @@
 	<!-- Spring管理Struts2的Action -->
 	<bean name="loginAction" class="com.jialin.action.LoginAction" scope="prototype"></bean>
 	<bean name="userMainAction" class="com.opensymphony.xwork2.ActionSupport" scope="prototype"></bean>
-	<bean name="userAction" class="com.jialin.action.UserAction" scope="prototype">
-		<!-- <property name="userManage" ref="userManage"></property> -->
-	</bean>
+	<bean name="userAction" class="com.jialin.action.UserAction" scope="prototype"></bean>
+	<bean name="userPopulationAction" class="com.jialin.action.UserPopulationAction" scope="prototype"></bean>
 
 	<!-- Spring管理Struts2的Interceptor -->
 	<bean name="checkLoginInterceptor" class="com.jialin.interceptor.CheckLogin" scope="prototype"></bean>
 
-	
+	<bean name="logincheckAction" class="com.jialin.action.LoginCheckAction" scope="prototype"></bean>
 	
 	<bean name="userManage" class="com.jialin.service.UserManageImp">
 		<!-- <property name="userDao" ref="userDao"></property> -->
 	</bean>
-		<bean name="pManage" class="com.jialin.service.PopulationManagerImp">
+		<bean name="userpManage" class="com.jialin.service.UserPopulationManagerImp">
 		<!-- <property name="userDao" ref="userDao"></property> -->
 	</bean>
 	
@@ -30,9 +29,16 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 		<!-- <constructor-arg ref=""></constructor-arg> -->
 	</bean>
+	<bean name="userpDao" class="com.jialin.dao.UserPopulationDaoImp">
+		<property name="sessionfactory" ref="sessionFactory" />
+		<!-- <constructor-arg ref=""></constructor-arg> -->
+	</bean>
 	<bean name="pDao" class="com.jialin.dao.PopulationDaoImp">
 		<property name="sessionfactory" ref="sessionFactory" />
 		<!-- <constructor-arg ref=""></constructor-arg> -->
+	</bean>
+	<bean name="pManage" class="com.jialin.service.PopulationManagerImp">
+		<!-- <property name="userDao" ref="userDao"></property> -->
 	</bean>
 	
 </beans>

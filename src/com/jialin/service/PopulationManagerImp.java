@@ -19,32 +19,48 @@ public class PopulationManagerImp implements IPopulationManage {
 	@Override
 	public void addPersion(Population p) {
 		// TODO Auto-generated method stub
-		pDao.add(p);
+		pDao.addPersion(p);
 	}
 
 	@Override
 	public void deletePersion(Population p) {
 		// TODO Auto-generated method stub
-		pDao.delete(p);
+		pDao.deletePersion(p);
 	}
 
 	@Override
 	public void modifyPersion(Population p) {
 		// TODO Auto-generated method stub
-		pDao.update(p);
+		pDao.modifyPersion(p);
 	}
 
 	@Override
 	public Population findPersionById(int id) {
 		// TODO Auto-generated method stub
 		
-		return pDao.getbyId(id);
+		return pDao.findPersionById(id);
 	}
 
 	@Override
 	public List<Population> getPersionList() {
 		// TODO Auto-generated method stub
-		return  pDao.findAll();
+		return  pDao.getPersionList();
+	}
+
+	@Override
+	public List<Population> QueryPopulationClassInfo(int currentPage) {
+		// TODO Auto-generated method stub
+		return pDao.QueryPopulationClassInfo(currentPage);
+	}
+
+	@Override
+	public void CalculateTotalPageAndRecordNumber() {
+		// TODO Auto-generated method stub
+		pDao.CalculateTotalPageAndRecordNumber();
+	}
+	public List<Population> getALLPersonLsit(String sql)
+	{
+		return pDao.getALLPersonLsit(sql);
 	}
 
 }
