@@ -31,7 +31,7 @@ public class CheckLogin implements Interceptor {
 
 		//String[] loginUsername=(String[])parameters.get("user.name");
 		
-		if(session.get("user.accountName")!=null)
+		if(session.get("accountName")!=null)
 		{
 			return arg0.invoke();
 		}

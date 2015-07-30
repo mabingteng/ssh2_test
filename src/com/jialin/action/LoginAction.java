@@ -33,7 +33,7 @@ public class LoginAction extends ActionSupport {
 		{
 			//HttpSession se = ServletActionContext.getRequest().getSession();
 			Map session=ActionContext.getContext().getSession();
-			session.put("user.accountName", user.getAccountName());
+			session.put("accountName", user.getAccountName());
 			
 			System.out.println("成功登陆用户="+user.getName());
 			return "success";
@@ -42,7 +42,7 @@ public class LoginAction extends ActionSupport {
 		{
 			//HttpSession se = ServletActionContext.getRequest().getSession();
 			Map session=ActionContext.getContext().getSession();
-			session.put("user.accountName", user.getAccountName());
+			session.put("accountName", user.getAccountName());
 			
 			System.out.println("成功登陆用户="+user.getName());
 			return "admin";

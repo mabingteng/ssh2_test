@@ -3,6 +3,7 @@ package com.jialin.basedao;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 @SuppressWarnings("unchecked")
@@ -58,12 +59,24 @@ public abstract  class BaseDaoImp<T> implements BaseDao<T> {
 	return getSession().createQuery("from "+clazz.getSimpleName()).list();
 	
     }
+    @Override
+    public List<T> getByHql(String Hql) {
+	
+	// TODO 自动生成的方法存根
+	Query query = getSession().createQuery(Hql);
+	
+	return query.list();
+    }
+    
 
     @Override
-    public T getbyId(int id) {
+    public T getbyId(long id) {
 	// TODO 自动生成的方法存根
 	return (T) getSession().get(clazz, id);
     }
+
+  
+    
     
     
 }
