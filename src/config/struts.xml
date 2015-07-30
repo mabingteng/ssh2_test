@@ -49,6 +49,7 @@
 
 	<!-- 包含的配置文件 -->
 	<include file="/config/struts-user.xml"></include>
+	<include file="/config/struts-cate.xml"></include>
 
 
 </struts>

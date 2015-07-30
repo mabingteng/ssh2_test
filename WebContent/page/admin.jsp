@@ -134,10 +134,10 @@ $(function(){
 					<div class="accordionContent">
 						<ul class="tree treeFolder">
 						     <li><a  href="user/uList_userList" target="navTab" rel="page_userlist">用户管理</a></li>
-						     <li><a herf="fail.jsp" target="navTab" rel="page2">角色管理</a></li>
+						     <li><a href="cate/cList_cateList" target="navTab" rel="page_catelist">菜单管理</a></li>		
 						     <li><a target="navTab">角色分配</a></li>	
 						     <li><a target="navTab">角色权限</a></li>			
-						     <li><a target="navTab">菜单管理</a></li>							 					
+						     					 					
 			       	    </ul>									
 					</div>
 					
