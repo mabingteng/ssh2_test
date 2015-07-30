@@ -56,7 +56,17 @@ public abstract  class BaseDaoImp<T> implements BaseDao<T> {
     @Override
     public List<T> findAll() {
 	// TODO 自动生成的方法存根	
-	return getSession().createQuery("from "+clazz.getSimpleName()).list();
+	System.out.println("from "+clazz.getSimpleName());
+	Session sess = this.getSession();
+	if(sess!=null)
+	{
+	    System.out.println("session ---buweikong"); 
+	    	Query query = getSession().createQuery("from "+clazz.getSimpleName());
+	    	if(query!=null)
+		return query.list();
+	}else
+	    System.out.println("session ---null"); 
+	return null;
 	
     }
     @Override
