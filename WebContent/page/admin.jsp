@@ -13,7 +13,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="themes/default/style.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="themes/css/core.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="themes/css/print.css" rel="stylesheet" type="text/css" media="print"/>
-
+<%String menuList =(String) request.getAttribute("menuList");
+String Folder =(String) request.getAttribute("Folder");
+String title =(String) request.getAttribute("toggleCollapse");
+%>
 <!--[if IE]>
 <link href="themes/css/ieHack.css" rel="stylesheet" type="text/css" media="screen"/>
 <![endif]-->
@@ -76,6 +79,17 @@ $(function(){
 			$("#themeList").theme({themeBase:"themes"}); // themeBase 相对于index页面的主题base路径
 		}
 	});
+	
+	
+ 	<%-- $.post('<%=basePath%>CategoryGoods',{"type":"initStore"},function(data){
+		var list=$('#mbt_dropdown-menu');
+		list.empty();
+		
+		for(var i=0;i<data.length;i++){
+			list.append("<li><a  onclick=\"getCate("+ data[i].sid+",'"+data[i].sname+"');\" class= \"mbt_a\" data-value="+ data[i].sid +" ><i class=\"whitespace\"></i>"+ data[i].sname+"</a></li>");
+		}
+
+	},"json");  --%>
 });
 
 </script>
@@ -125,19 +139,15 @@ $(function(){
 				</div>
 			</div>
 			<div id="sidebar">
-				<div class="toggleCollapse"><h2>系统管理服务</h2><div>收缩</div></div>
+				<div class="toggleCollapse"><h2><%= title %></h2><div>收缩</div></div>
 
 				<div class="accordion" fillSpace="sidebar">
 					<div class="accordionHeader">
-						<h2><span>Folder</span>系统管理</h2>
+						<h2><span>Folder</span><%=Folder %></h2>
 					</div>
 					<div class="accordionContent">
 						<ul class="tree treeFolder">
-						     <li><a  href="user/uList_userList" target="navTab" rel="page_userlist">用户管理</a></li>
-						     <li><a href="cate/cList_cateList" target="navTab" rel="page_catelist">菜单管理</a></li>		
-						     <li><a target="navTab">角色分配</a></li>	
-						     <li><a target="navTab">角色权限</a></li>			
-						     					 					
+							<%=menuList %> 	 						
 			       	    </ul>									
 					</div>
 					
@@ -163,6 +173,7 @@ $(function(){
 				<div class="navTab-panel tabsPageContent layoutBox">
 					<div class="page unitBox">						
 						<div class="pageFormContent" layoutH="80" style="margin-right:230px">		
+						
                  <div class="divider"></div>
 				</div>
 						

@@ -13,4 +13,5 @@ public interface IUserManage {
 	public User getByAccountName(String acname);
 	public User getById(long id);
 	public List<User> getByHql(String hql);
+	public String findUserByAccountnameAndPassword(String accountName , String password);
 }

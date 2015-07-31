@@ -182,11 +182,11 @@ a:hover {text-decoration:underline;}
 .shadow .shadow_c, .shadow .shadow_c_l, .shadow .shadow_c_r, .shadow .shadow_c_c { display:block; overflow:hidden; height:100%;}
 
 /* Tree */
-.tree li { clear:both; display:block; line-height:22px; cursor:pointer;}
+.tree li { clear:both; display:block; line-height:22px; cursor:pointer;text-align: left;}
 .tree div, .tree a, .tree span { display:inherit; height:22px; line-height:22px;}
 .tree div { display:block; overflow:hidden;}
 .tree div div { float:left; display:block; overflow:hidden; width:22px; height:22px; border:none; background-position:0 -100px;}
-.tree a, .tree a:hover { text-decoration:none;}
+.tree a, .tree a:hover { text-decoration:none;text-align: left;}
 
 .tree .collapsable { background-position:0 -300px;}
 .tree .first_collapsable { background-position:0 -250px;}

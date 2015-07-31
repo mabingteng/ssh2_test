@@ -65,4 +65,16 @@ public class UserManageImp implements IUserManage {
 	    // TODO 自动生成的方法存根
 	    return userDao.getByHql(hql);
 	}
+
+	@Override
+	public String findUserByAccountnameAndPassword(String accountName, String password) {
+	    // TODO 自动生成的方法存根
+	    String hql="from User where accountName ='"+accountName+"' and password = '"+password+"' and deleteMark = 1 and status = 'ON'";
+	    List<User> uList =   userDao.getByHql(hql);
+	    if(uList!=null&&uList.size()!=0){
+		User u = uList.get(0);
+		return u.getUserType();
+	    }
+	    return null;
+	}
 }

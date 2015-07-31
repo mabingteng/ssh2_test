@@ -97,4 +97,67 @@ public class CategoryServiceImp implements ICategoryService {
 	return sb;
     }
 
+    @Override
+    public String getTreeMenuList(String type) {
+	StringBuffer sb = new StringBuffer();
+	int level =0 ;
+	switch (type) {
+	case "系统管理员":
+	    level = 1;
+	    break;
+	    case "管理员":
+		level =2 ;
+		break;
+	    case "用户":
+		level =3 ;
+		break;
+	default:
+	    break;
+	}
+	//查管理员可见菜单，状态为ON 
+	Category c = new Category();
+	String hql1 = "from Category where ParentID ="+0 +"and Status = 'ON' and Check_Level = "+level+" and DeleteMark = '1' order by id ASC";
+	List<Category> list1 = this.getByHql(hql1);
+	if(list1.size()!=0){
+	    System.out.println(list1.size());
+	    for(int i1=0;i1<list1.size();i1++){
+	       c = list1.get(i1);
+	      
+	       sb.append("<li><a href=\""+c.getActionUrl()+"\" rel = \""+c.getCode()+"\"  target=\"navTab\" >"+c.getName()+"</a>");
+	       if(c.getDisLevel()==1){
+		  sb =   getMenuTree(sb,c.getId(),level);
+	       }else if (c.getDisLevel()==0)
+	       {
+		
+	       sb.append("</li>");
+	       }
+	    }
+	}
+	return sb.toString();
+    }
+    
+    private StringBuffer getMenuTree(StringBuffer sb,long ParentID,int level ){
+   	sb.append("<ul>");
+   	Category c = new Category();
+   	String Hql = "from Category where ParentID ="+ParentID +"and Status = 'ON' and Check_Level = "+level+" and DeleteMark = '1' order by id ASC";
+   	List<Category> list1 = this.getByHql(Hql);
+   	if(list1.size()!=0){
+   	    System.out.println(list1.size());
+   	    for(int i1=0;i1<list1.size();i1++){
+   	       c = list1.get(i1);
+   	    sb.append("<li><a href=\""+c.getActionUrl()+"\" rel = \""+c.getCode()+"\"  target=\"navTab\" >"+c.getName()+"</a>");
+   	       if(c.getDisLevel()==1){
+   		  sb =   getTree(sb,c.getId());
+   	       }else if (c.getDisLevel()==0)
+   	       {
+   	       	
+   	       sb.append("</li>");
+   	       }
+   	    }
+   	}
+   	sb.append("</ul>");
+   	return sb;
+       }
+
+
 }

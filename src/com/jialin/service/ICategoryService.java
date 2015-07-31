@@ -13,4 +13,5 @@ public interface ICategoryService {
 	public Category getById(long id);
 	public List<Category> getByHql(String hql);
 	public String getMenuList();
+	public String getTreeMenuList(String type);
 }

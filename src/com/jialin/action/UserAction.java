@@ -64,6 +64,7 @@ public class UserAction extends ActionSupport {
 	}
 	public String uAdd() throws IOException{
 	    System.out.println(this.getClass()+" :uAdd()");
+	    user.setDeleteMark("1");
 	    if(user.getDes()==null){
 		user.setDes("");
 	    }

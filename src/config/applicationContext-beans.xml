@@ -13,6 +13,7 @@
 	<bean name="userAction" class="com.jialin.action.UserAction" scope="prototype"></bean>
 	<bean name="userPopulationAction" class="com.jialin.action.UserPopulationAction" scope="prototype"></bean>
 	<bean name="cateAction" class="com.jialin.action.CategoryAction" scope="prototype"></bean>
+	<bean name="priAction" class="com.jialin.action.PriorityAction" scope="prototype"></bean>
 	<!-- Spring管理Struts2的Interceptor -->
 		<bean name="checkLoginInterceptor" class="com.jialin.interceptor.CheckLogin" scope="prototype"></bean>
 	
