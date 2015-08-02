@@ -16,15 +16,16 @@
 <base>
 <title></title>
 </head>
-<%
-    String userType = (String) request.getAttribute("userType");
-			String htmlstr = (String) request.getAttribute("htmlstr");
-%>
+
 <body>
 	<div onscroll="auto">
 		<input type="hidden" name="RID" value="<%=17%>" />
 		<div onscroll="auto">
 			<input type="hidden" name="RID" value="17" />
+			<%
+   				 String userType = (String) request.getAttribute("userType");
+			  	 String htmlstr = (String) request.getAttribute("htmlstr");
+			%>
 			<h2 class="contentTitle">
 				当前角色：<%=userType%></h2>
 			<div class="pageFormContent" layouth="126">
@@ -64,13 +65,7 @@
 					id="btnCheckAll" />全选
 				</label>
 				<ul>
-					<li>
-						<div class="button">
-							<div class="buttonContent">
-								<button type="button" class="checkboxCtrl" id="btnCheckReverse">反选</button>
-							</div>
-						</div>
-					</li>
+					
 					<li>
 						<div class="buttonActive">
 							<div class="buttonContent">

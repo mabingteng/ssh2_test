@@ -56,42 +56,47 @@ public class LoginAction extends ActionSupport {
 	    
 	    Map session=ActionContext.getContext().getSession();
 	  
-	    String userType  = (String) session.get("userType");
-	    if(session.get("accountName")==null&&userType==null){
-		 return Login("firstLogin",userType);
+	    String refreshFlag  = (String) session.get("refreshFlag");
+	    if(refreshFlag==null){
+	    return  Login();
 	    }else{
-		return  Login("alreadyLogin",userType);
+		session.remove("refreshFlag");
+		String menuList = cateManage.getTreeMenuList("系统管理员");
+		HttpServletRequest req = ServletActionContext.getRequest();
+		req.setCharacterEncoding("utf8");
+		req.setAttribute("menuList", menuList);
+		req.setAttribute("Folder", "系统管理");
+		req.setAttribute("toggleCollapse", "系统管理服务");
+		return "admin";
 	    }
+	    
 		
 		
 	}
-	private String Login(String type,String userType) throws UnsupportedEncodingException{
+	private String Login(  ) throws UnsupportedEncodingException{
 	    Map session=ActionContext.getContext().getSession();
-	   if(type.equals("firstLogin")){
-	       userType = userManage.findUserByAccountnameAndPassword(user.getAccountName(), user.getPassword());
-	       session.put("accountName", user.getAccountName());
-	   
-	   }else  if(type.equals("alreadyLogin")){
-	      
-	   }
-	   
+	    String  userType = userManage.findUserByAccountnameAndPassword(user.getAccountName(), user.getPassword());
+	    session.put("accountName", user.getAccountName());
+	    session.put("userType",userType);
+	    String menuList = cateManage.getTreeMenuList(userType);
+	    HttpServletRequest req = ServletActionContext.getRequest();
+	    req.setCharacterEncoding("utf8");
+	    req.setAttribute("menuList", menuList);
 	   if(userType==null){
 		    return "fail";
 		} else if ("系统管理员".equals(userType)){   
-		    session.put("userType",userType);
-		    String menuList = cateManage.getTreeMenuList(userType);
-		    HttpServletRequest req = ServletActionContext.getRequest();
-		    req.setCharacterEncoding("utf8");
-		    req.setAttribute("menuList", menuList);
-		    req.setAttribute("Folder", "系统管理");
-		    req.setAttribute("toggleCollapse", "系统管理服务");
 		    
+		    req.setAttribute("Folder", "系统管理");
+		    req.setAttribute("toggleCollapse", "系统管理服务");		    
 		    return "admin";
 		}else if ("管理员".equals(userType)){
-		    
-		    return SUCCESS;
+		    req.setAttribute("Folder", "社会治理");
+		    req.setAttribute("toggleCollapse", "社会治理服务");
+		 //   return "admin";   //功能已实现
+		   return SUCCESS;
 		}else if ("用户".equals(userType)){
-		    
+		    req.setAttribute("Folder", "系统管理");
+		    req.setAttribute("toggleCollapse", "系统管理服务");
 		    return "user";
 		}
 	    return SUCCESS;

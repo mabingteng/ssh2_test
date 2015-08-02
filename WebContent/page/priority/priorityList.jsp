@@ -11,8 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <base >
 <script>
     $(document).ready(function () {   
-       var na = $("a[rel='priority_page']").first();
-      $("#wprel").loadUrl(na.attr("href"), null, null);
+       var na = $("a[rel='wprel']").last();
+    //  $("#wprel").loadUrl(na.attr("href"), null, null);
     });
 </script>  
 </head>
@@ -35,17 +35,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  
 
             <ul id="areatreeul" class="tree  treeFolder">
-
                
-              
-                   
-                         <li> <a href="priority/pList_priority?type=1" target="ajax" rel="priority_page">系统管理员</a></li>
-				    	<li> <a href="priority/pList_priority?type=2" target="ajax" rel="priority_page">普通管理员</a></li>
-						<li> <a href="priority/pList_priority?type=3" target="ajax" rel="priority_page">一般用户</a></li>       
-                        
-                  
-             
-               
+                         <li> <a href="priority/pList_priority?type=1" target="ajax" rel="wprel">系统管理员</a></li>
+				    	
+						<li> <a href="priority/pList_priority?type=3" target="ajax" rel="wprel">一般用户</a></li>    
+						
+						<li> <a href="priority/pList_priority?type=2" target="ajax" rel="wprel">普通管理员</a></li>   
+ 
             </ul>
 
 

@@ -50,6 +50,9 @@ public class CategoryServiceImp implements ICategoryService {
     }
 
     @Override
+    /**
+     * 添加菜单时，获得菜单树
+     */
     public String getMenuList() {
 	// TODO 自动生成的方法存根
 	StringBuffer sb = new StringBuffer();
@@ -98,6 +101,9 @@ public class CategoryServiceImp implements ICategoryService {
     }
 
     @Override
+    /**
+     * 获得侧边栏菜单
+     */
     public String getTreeMenuList(String type) {
 	StringBuffer sb = new StringBuffer();
 	int level =0 ;
@@ -147,7 +153,7 @@ public class CategoryServiceImp implements ICategoryService {
    	       c = list1.get(i1);
    	    sb.append("<li><a href=\""+c.getActionUrl()+"\" rel = \""+c.getCode()+"\"  target=\"navTab\" >"+c.getName()+"</a>");
    	       if(c.getDisLevel()==1){
-   		  sb =   getTree(sb,c.getId());
+   		  sb =   getMenuTree(sb,c.getId(),level);
    	       }else if (c.getDisLevel()==0)
    	       {
    	       	

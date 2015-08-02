@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import com.jialin.entity.Category;
 import com.jialin.entity.User;
 import com.jialin.service.ICategoryService;
 import com.jialin.service.IUserManage;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 
@@ -26,7 +28,7 @@ public class PriorityAction extends ActionSupport {
 	@Resource  
 	private ICategoryService cateManage;
 	
-	private String [] strList;
+
 	
 	public ICategoryService getCateManage() {
 	    return cateManage;
@@ -41,11 +43,14 @@ public class PriorityAction extends ActionSupport {
 	    return SUCCESS;
 	    
 	}
+	/**
+	 * 菜单权限设置
+	 * @throws IOException
+	 */
+	@SuppressWarnings("unchecked")
 	public void pSetMenus() throws IOException{
 	    HttpServletRequest req = ServletActionContext.getRequest();
-	    HttpServletResponse resp = ServletActionContext.getResponse();
-	    resp.setContentType("text/html");
-	    resp.setCharacterEncoding("utf8");
+	  
 	    String ids = req.getParameter("ids");
 	    String[] idsl = ids.split("_"); 
 	    String hql1  = "update Category s set s.status= 'OFF' where s.check_Level = 1";
@@ -60,30 +65,42 @@ public class PriorityAction extends ActionSupport {
 	   if(idsl.length!=0){
 	      cateManage.executeHql(hql);
 	   }
-	 
-	    PrintWriter out =  resp.getWriter();
-	    out.write("ok");
-	    out.flush();
-	    out.close();
+	   Map session=ActionContext.getContext().getSession();
+	   session.put("refreshFlag", "refreshFlag");
+	   
+	  
 	}
-	
+	/**
+	 * 获得各个系统的复选框，用户权限！
+	 * 待扩展用户界面
+	 * @return
+	 */
 	public String pList(){
 	    HttpServletRequest req= ServletActionContext.getRequest();
+	    StringBuffer sb = new StringBuffer();
 	    String type = req.getParameter("type");
-	    if("1".equals(type)){
-		
-		StringBuffer sb = new StringBuffer();
+	    if("1".equals(type)){		
 		req.setAttribute("userType", "系统管理员");
 		sb.append("<fieldset><legend>系统管理<input type=\"checkbox\" name=\"g4\" class=\"checkboxCtrl\" value=\"sysManage\" group=\"c4\" /></legend>");
 		sb.append("<dl class=\"nowrap\"><dd style=\"width: 800px;\">");
 		sb = getCheckboxStr(type, sb);
-		sb.append("</dd></dl></fieldset>");
-		req.setAttribute("htmlstr", sb.toString());
+		sb.append("</dd></dl></fieldset>");		
+	    }else if("2".equals(type)){
+		req.setAttribute("userType", "管理员");
+		sb.append("<fieldset><legend>社会治理服务<input type=\"checkbox\" name=\"g4\" class=\"checkboxCtrl\" value=\"sysManage\" group=\"c4\" /></legend>");
+		sb.append("<dl class=\"nowrap\"><dd style=\"width: 800px;\">");
+		sb = getCheckboxStr(type, sb);
+		sb.append("</dd></dl></fieldset>");	
+		System.out.println("管理员登录菜单管理");
+		
 	    }
-	   // HttpServletResponse resp = ServletActionContext.getResponse();
+	    req.setAttribute("htmlstr", sb.toString());
 	    
 	    return SUCCESS;
 	}
+	
+	
+	
 	private StringBuffer getCheckboxStr(String check_type,StringBuffer sb){
 	    
 	   String hql = "from Category where check_Level = "+check_type +"and deleteMark = 1 and disLevel = 0";
@@ -103,13 +120,7 @@ public class PriorityAction extends ActionSupport {
 	   return sb; 
 	}
 
-	public String [] getStrList() {
-	    return strList;
-	}
 
-	public void setStrList(String [] strList) {
-	    this.strList = strList;
-	}
 	
 	
 }

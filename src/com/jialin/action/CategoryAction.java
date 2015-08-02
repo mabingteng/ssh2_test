@@ -128,7 +128,12 @@ public class CategoryAction extends ActionSupport {
 	public String uUpdateData() throws IOException{
 	    return SUCCESS;
 	}
-	public String uExecute() throws UnsupportedEncodingException{
+	/**
+	 * 菜单查找
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	public String cExecute() throws UnsupportedEncodingException{
 	 /*   String hql = "from User where name like '%" +user.getName()+"%'";
 	    List<User> list =  cateManage.getByHql(hql);
 	   
@@ -138,6 +143,11 @@ public class CategoryAction extends ActionSupport {
 	    req.setAttribute("ulist", list);*/
 	    return SUCCESS;
 	}
+	/**
+	 * 菜单添加时，获取菜单树
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	public String cSelectList() throws UnsupportedEncodingException{
 	    String selectList = "";
 	    selectList = cateManage.getMenuList();
