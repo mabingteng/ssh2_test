@@ -37,4 +37,6 @@ public interface BaseDao<T> {
      * 根据hql语句获得list
      */
     public List<T> getByHql(String Hql);
+    
+    public void executeHql(String hql);
 }

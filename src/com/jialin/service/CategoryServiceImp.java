@@ -159,5 +159,11 @@ public class CategoryServiceImp implements ICategoryService {
    	return sb;
        }
 
+    @Override
+    public void executeHql(String hql) {
+	// TODO 自动生成的方法存根
+	cateDao.executeHql(hql);
+    }
+
 
 }

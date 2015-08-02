@@ -84,6 +84,12 @@ public abstract  class BaseDaoImp<T> implements BaseDao<T> {
 	// TODO 自动生成的方法存根
 	return (T) getSession().get(clazz, id);
     }
+    
+    public void executeHql(String hql){
+	Query query =getSession().createQuery(hql);
+	int n = query.executeUpdate();
+	System.out.println("BaseDao  executeHql :"+n);
+    }
 
   
     

@@ -1,5 +1,6 @@
 package com.jialin.action;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -13,7 +14,7 @@ import com.jialin.service.ICategoryService;
 import com.jialin.service.IUserManage;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-
+@SuppressWarnings("unchecked")
 public class LoginAction extends ActionSupport {
 	private User user;
 	
@@ -48,20 +49,37 @@ public class LoginAction extends ActionSupport {
 		this.user = user;
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public String execute() throws Exception {
 		
-		HttpServletRequest request=ServletActionContext.getRequest();
+	    
+	    Map session=ActionContext.getContext().getSession();
+	  
+	    String userType  = (String) session.get("userType");
+	    if(session.get("accountName")==null&&userType==null){
+		 return Login("firstLogin",userType);
+	    }else{
+		return  Login("alreadyLogin",userType);
+	    }
 		
-		System.out.println(request.getCharacterEncoding());
-		String type = userManage.findUserByAccountnameAndPassword(user.getAccountName(), user.getPassword());
-		if(type==null){
+		
+	}
+	private String Login(String type,String userType) throws UnsupportedEncodingException{
+	    Map session=ActionContext.getContext().getSession();
+	   if(type.equals("firstLogin")){
+	       userType = userManage.findUserByAccountnameAndPassword(user.getAccountName(), user.getPassword());
+	       session.put("accountName", user.getAccountName());
+	   
+	   }else  if(type.equals("alreadyLogin")){
+	      
+	   }
+	   
+	   if(userType==null){
 		    return "fail";
-		} else if ("系统管理员".equals(type)){
-		    Map session=ActionContext.getContext().getSession();
-		    session.put("accountName", user.getAccountName());
-		    String menuList = cateManage.getTreeMenuList(type);
+		} else if ("系统管理员".equals(userType)){   
+		    session.put("userType",userType);
+		    String menuList = cateManage.getTreeMenuList(userType);
 		    HttpServletRequest req = ServletActionContext.getRequest();
 		    req.setCharacterEncoding("utf8");
 		    req.setAttribute("menuList", menuList);
@@ -69,35 +87,14 @@ public class LoginAction extends ActionSupport {
 		    req.setAttribute("toggleCollapse", "系统管理服务");
 		    
 		    return "admin";
-		}else if ("管理员".equals(type)){
+		}else if ("管理员".equals(userType)){
 		    
 		    return SUCCESS;
-		}else if ("用户".equals(type)){
+		}else if ("用户".equals(userType)){
 		    
 		    return "user";
 		}
-		
-		/*if("root".equals(user.getAccountName()) && "root".equals(user.getPassword()))
-		{
-			//HttpSession se = ServletActionContext.getRequest().getSession();
-			Map session=ActionContext.getContext().getSession();
-			session.put("accountName", user.getAccountName());
-			
-			System.out.println("成功登陆用户="+user.getName());
-			return "success";
-		}
-		if("admin".equals(user.getAccountName()) && "admin".equals(user.getPassword()))
-		{
-			//HttpSession se = ServletActionContext.getRequest().getSession();
-			Map session=ActionContext.getContext().getSession();
-			session.put("accountName", user.getAccountName());
-			
-			System.out.println("成功登陆用户="+user.getName());
-			return "admin";
-		}
-		*/
-		System.out.println("失败登陆用户="+user.getName());
-		return "fail";
+	    return SUCCESS;
 	}
 	
 }
